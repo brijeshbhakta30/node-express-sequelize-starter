@@ -1,0 +1,121 @@
+{
+  "name": "node-express-sequalize-starter",
+  "version": "1.0.0",
+  "description": "Starter project for node js which uses express and sequalize orm for database management.",
+  "main": "index.js",
+  "private": true,
+  "engines": {
+    "node": ">=4.6.x",
+    "npm": ">=2.15.x"
+  },
+  "scripts": {
+    "prestart": "yarn build:server && yarn db:migrate",
+    "precommit": "yarn lint",
+    "prepush": "yarn lint",
+    "postinstall": "yarn db:migrate",
+    "start": "node dist/src/index.js",
+    "db:migrate": "sequelize db:migrate",
+    "dev": "nodemon --exec babel-node src",
+    "build": "yarn build:server",
+    "build:server": "babel src --out-dir dist/src",
+    "lint": "esw *.js src config --color",
+    "lint:watch": "yarn lint -- --watch"
+  },
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "bluebird": "3.4.6",
+    "body-parser": "1.15.2",
+    "compression": "1.6.2",
+    "cookie-parser": "1.4.3",
+    "cors": "2.8.1",
+    "express": "4.14.0",
+    "express-jwt": "5.1.0",
+    "express-validation": "1.0.1",
+    "express-winston": "2.0.0",
+    "faker": "3.1.0",
+    "helmet": "3.1.0",
+    "http-status": "0.2.5",
+    "joi": "9.2.0",
+    "jsonwebtoken": "7.1.9",
+    "lodash": "4.17.4",
+    "method-override": "2.3.10",
+    "mysql2": "1.5.1",
+    "sequelize": "4.31.0",
+    "winston": "2.3.0"
+  },
+  "devDependencies": {
+    "babel-cli": "6.18.0",
+    "babel-core": "6.18.0",
+    "babel-plugin-add-module-exports": "0.2.1",
+    "babel-plugin-transform-object-assign": "6.8.0",
+    "babel-preset-latest": "^6.16.0",
+    "commitizen": "^2.8.2",
+    "cz-conventional-changelog": "1.2.0",
+    "del": "^2.2.0",
+    "eslint": "3.10.2",
+    "eslint-config-airbnb-base": "7.1.0",
+    "eslint-plugin-import": "1.16.0",
+    "eslint-watch": "2.1.14",
+    "gulp": "3.9.1",
+    "gulp-babel": "6.1.2",
+    "gulp-load-plugins": "^1.2.0",
+    "gulp-newer": "^1.1.0",
+    "gulp-nodemon": "^2.0.6",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-util": "^3.0.7",
+    "husky": "0.13.4",
+    "isparta": "4.0.0",
+    "mocha": "3.1.2",
+    "run-sequence": "^1.1.5",
+    "sequelize-cli": "3.2.0",
+    "supertest": "2.0.1",
+    "supertest-as-promised": "4.0.2",
+    "validate-commit-msg": "^2.6.1"
+  },
+  "config": {
+    "ghooks": {
+      "pre-commit": "npm run lint"
+    },
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    },
+    "validate-commit-msg": {
+      "types": [
+        "feat",
+        "fix",
+        "docs",
+        "style",
+        "refactor",
+        "perf",
+        "test",
+        "build",
+        "ci",
+        "chore",
+        "revert"
+      ],
+      "scope": {
+        "required": false,
+        "allowed": [
+          "*"
+        ],
+        "validate": false,
+        "multiple": true
+      },
+      "warnOnFail": true,
+      "maxSubjectLength": 100,
+      "subjectPattern": ".+",
+      "subjectPatternErrorMsg": "subject does not match subject pattern!",
+      "helpMessage": "",
+      "autoFix": false
+    }
+  },
+  "babel": {
+    "presets": [
+      "latest"
+    ],
+    "plugins": [
+      "add-module-exports",
+      "transform-object-assign"
+    ]
+  }
+}
