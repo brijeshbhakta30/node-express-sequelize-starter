@@ -1,7 +1,7 @@
 module.exports = {
   development: {
     username: 'root',
-    password: null,
+    password: 'root',
     database: 'node-express-sequelize-starter-dev',
     host: '127.0.0.1',
     port: 3306,

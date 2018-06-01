@@ -1,5 +1,6 @@
-import Sequelize from 'sequelize';
-import config from './env';
+const Sequelize = require('sequelize');
+const debug = require('debug')('node-server:db');
+const config = require('./index');
 
 const { db: dbDetails } = config;
 const sequelize = new Sequelize(dbDetails.database, dbDetails.username, dbDetails.password, {
@@ -16,10 +17,10 @@ const sequelize = new Sequelize(dbDetails.database, dbDetails.username, dbDetail
 sequelize
   .authenticate()
   .then(() => {
-    console.log('Connection has been established successfully.');
+    debug('Connection has been established successfully.');
   })
   .catch((err) => {
-    console.error('Unable to connect to the database:', err);
+    debug('Unable to connect to the database:', err);
   });
 
-export default { sequelize };
+module.exports = { sequelize };

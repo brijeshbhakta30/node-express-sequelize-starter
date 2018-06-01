@@ -1,6 +1,7 @@
 # node-express-sequalize-starter
 
 This project uses [yarn](https://yarnpkg.com/) package manager.
+This project validates the commit message by [this](https://github.com/marionebl/commitlint/tree/master/%40commitlint/config-conventional) convention
 
 ### Install yarn
 

@@ -1,9 +1,9 @@
-import Sequelize from 'sequelize';
-import httpStatus from 'http-status';
-import bcrypt from 'bcrypt-nodejs';
-import _ from 'lodash';
-import db from '../../config/db';
-import APIError from '../../helpers/APIError';
+const Sequelize = require('sequelize');
+const httpStatus = require('http-status');
+const bcrypt = require('bcrypt-nodejs');
+const _ = require('lodash');
+const db = require('../../config/db');
+const APIError = require('../../helpers/APIError');
 
 /**
  * User Schema
@@ -27,12 +27,7 @@ const UserSchema = {
   },
   password: {
     type: Sequelize.STRING,
-  },
-  status: {
-    type: Sequelize.INTEGER,
     allowNull: false,
-    defaultValue: 1,
-    comment: '0 - Pending Verification, 1 - Active, 2 - Suspended',
   },
   createdAt: {
     allowNull: false,
@@ -84,7 +79,7 @@ User.getByEmail = function getByEmail(email) {
   return this.findOne({
     where: {
       email,
-    }
+    },
   });
 };
 
@@ -121,4 +116,4 @@ User.prototype.safeModel = function safeModel() {
 /**
  * @typedef User
  */
-export default User;
+module.exports = User;

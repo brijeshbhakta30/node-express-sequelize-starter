@@ -1,10 +1,10 @@
-import User from './user.model';
+const User = require('./user.model');
 
 /**
  * Load user and append to req.
  */
 function load(req, res, next, id) {
-  User.get(id)
+  return User.get(id)
     .then((user) => {
       req.user = user; // eslint-disable-line no-param-reassign
       return next();
@@ -22,10 +22,10 @@ function get(req, res) {
 
 /**
  * Get user profile of logged in user
- * @returns {User}
+ * @returns {Promise<User>}
  */
 function getProfile(req, res, next) {
-  User.get(res.locals.session.id)
+  return User.get(res.locals.session.id)
     .then(user => res.json(user.safeModel()))
     .catch(e => next(e));
 }
@@ -43,7 +43,7 @@ function update(req, res, next) {
   user.firstName = req.body.firstName || user.firstName;
   user.lastName = req.body.lastName || user.lastName;
 
-  user.save()
+  return user.save()
     .then(savedUser => res.json(savedUser.safeModel()))
     .catch(e => next(e));
 }
@@ -52,11 +52,11 @@ function update(req, res, next) {
  * Get user list.
  * @property {number} req.query.skip - Number of users to be skipped.
  * @property {number} req.query.limit - Limit number of users to be returned.
- * @returns {User[]}
+ * @returns {Promise<User[]>}
  */
 function list(req, res, next) {
   const { limit = 50, skip = 0 } = req.query;
-  User.list({ limit, skip })
+  return User.list({ limit, skip })
     .then(users => res.json(users))
     .catch(e => next(e));
 }
@@ -72,4 +72,4 @@ function destroy(req, res, next) {
     .catch(e => next(e));
 }
 
-export default { load, get, getProfile, update, list, destroy };
+module.exports = { load, get, getProfile, update, list, destroy };

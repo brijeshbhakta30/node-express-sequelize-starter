@@ -1,11 +1,11 @@
-import jwt from 'jsonwebtoken';
-import httpStatus from 'http-status';
-import APIError from '../../helpers/APIError';
-import User from '../user/user.model';
-import config from '../../config/env';
+const jwt = require('jsonwebtoken');
+const httpStatus = require('http-status');
+const User = require('../user/user.model');
+const APIError = require('../../helpers/APIError');
+const config = require('../../config');
 
 /**
- *  Returns jwt token and user details if valid email and password are provided
+ * Returns jwt token and user details if valid email and password are provided
  * @property {string} req.body.email - The email of user.
  * @property {string} req.body.password - The password of user.
  * @returns {token, User}
@@ -14,11 +14,11 @@ function login(req, res, next) {
   User.getByEmail(req.body.email)
     .then((foundUser) => {
       if (!foundUser) {
-        const err = new APIError('User not found', httpStatus.UNAUTHORIZED);
+        const err = new APIError('User not found', httpStatus.UNAUTHORIZED, true);
         return next(err);
       }
       if (!foundUser.validPassword(req.body.password)) {
-        const err = new APIError('User email and password combination do not match', httpStatus.UNAUTHORIZED);
+        const err = new APIError('User email and password combination do not match', httpStatus.UNAUTHORIZED, true);
         return next(err);
       }
       const token = jwt.sign(foundUser.safeModel(), config.jwtSecret, {
@@ -46,7 +46,7 @@ function register(req, res, next) {
   User.getByEmail(req.body.email)
     .then((foundUser) => {
       if (foundUser) {
-        return Promise.reject(new APIError('Email must be unique', httpStatus.CONFLICT));
+        return Promise.reject(new APIError('Email must be unique', httpStatus.CONFLICT, true));
       }
       user.password = user.generatePassword(req.body.password);
       return user.save();
@@ -63,4 +63,4 @@ function register(req, res, next) {
     .catch(e => next(e));
 }
 
-export default { login, register };
+module.exports = { login, register };
