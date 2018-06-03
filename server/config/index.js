@@ -13,6 +13,8 @@ const envVarsSchema = Joi.object({
     .default(4040),
   JWT_SECRET: Joi.string().required()
     .description('JWT Secret required to sign'),
+  JWT_EXPIRES_IN: Joi.number().default(1440)
+    .description('JWT expiration time in seconds'),
 }).unknown()
   .required();
 
@@ -26,6 +28,7 @@ const config = {
   port: envVars.PORT,
   mongooseDebug: envVars.MONGOOSE_DEBUG,
   jwtSecret: envVars.JWT_SECRET,
+  jwtExpiresIn: envVars.JWT_EXPIRES_IN,
   db: dbConfig[envVars.NODE_ENV],
 };
 
