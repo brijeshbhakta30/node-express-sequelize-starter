@@ -11,14 +11,16 @@
     "npm": ">=5.5.1"
   },
   "scripts": {
-    "start": "node server",
-    "start:debug": "cross-env DEBUG=node-server:* npm start",
+    "commitmsg": "commitlint -e $GIT_PARAMS",
+    "db:migrate": "sequelize db:migrate",
+    "dev": "cross-env NODE_ENV=development DEBUG=node-server:* nodemon server",
     "lint": "esw *.js server config --color",
     "lint:watch": "yarn lint -- --watch",
-    "commitmsg": "commitlint -e $GIT_PARAMS",
-    "prestart": "yarn db:migrate",
     "precommit": "npm run lint",
-    "db:migrate": "sequelize db:migrate"
+    "predev": "cross-env NODE_ENV=development yarn db:migrate",
+    "prestart": "yarn db:migrate",
+    "start": "node server",
+    "start:debug": "cross-env DEBUG=node-server:* npm start"
   },
   "repository": {
     "type": "git",
@@ -71,6 +73,7 @@
     "eslint-plugin-import": "2.12.0",
     "eslint-watch": "3.1.5",
     "husky": "0.14.3",
+    "nodemon": "1.18.9",
     "sequelize-cli": "4.0.0"
   }
 }
