@@ -14,7 +14,7 @@
     "commitmsg": "commitlint -e $GIT_PARAMS",
     "db:migrate": "sequelize db:migrate",
     "dev": "cross-env NODE_ENV=development DEBUG=node-server:* nodemon src",
-    "lint": "esw src --color --fix",
+    "lint": "esw src --color",
     "lint:watch": "npm run lint -- --watch",
     "precommit": "npm run lint",
     "predev": "cross-env NODE_ENV=development npm run db:migrate",
