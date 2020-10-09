@@ -73,7 +73,19 @@
     "eslint-plugin-import": "2.22.1",
     "eslint-watch": "7.0.0",
     "husky": "4.3.0",
+    "lint-staged": "10.4.0",
     "nodemon": "2.0.4",
     "sequelize-cli": "6.2.0"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
+    }
   }
 }
