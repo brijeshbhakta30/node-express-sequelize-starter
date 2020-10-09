@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const httpStatus = require('http-status');
-const User = require('../user/user.model');
+const { User } = require('../models');
 const APIError = require('../../helpers/APIError');
 const config = require('../../config');
 
@@ -29,7 +29,7 @@ function login(req, res, next) {
         user: foundUser.safeModel(),
       });
     })
-    .catch(err => next(new APIError(err.message, httpStatus.NOT_FOUND)));
+    .catch((err) => next(new APIError(err.message, httpStatus.NOT_FOUND)));
 }
 
 /**
@@ -60,7 +60,7 @@ function register(req, res, next) {
         user: savedUser.safeModel(),
       });
     })
-    .catch(e => next(e));
+    .catch((e) => next(e));
 }
 
 module.exports = { login, register };

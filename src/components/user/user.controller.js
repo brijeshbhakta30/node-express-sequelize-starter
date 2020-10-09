@@ -9,7 +9,7 @@ function load(req, res, next, id) {
       req.user = user; // eslint-disable-line no-param-reassign
       return next();
     })
-    .catch(e => next(e));
+    .catch((e) => next(e));
 }
 
 /**
@@ -26,8 +26,8 @@ function get(req, res) {
  */
 function getProfile(req, res, next) {
   return User.get(res.locals.session.id)
-    .then(user => res.json(user.safeModel()))
-    .catch(e => next(e));
+    .then((user) => res.json(user.safeModel()))
+    .catch((e) => next(e));
 }
 
 /**
@@ -44,8 +44,8 @@ function update(req, res, next) {
   user.lastName = req.body.lastName || user.lastName;
 
   return user.save()
-    .then(savedUser => res.json(savedUser.safeModel()))
-    .catch(e => next(e));
+    .then((savedUser) => res.json(savedUser.safeModel()))
+    .catch((e) => next(e));
 }
 
 /**
@@ -57,8 +57,8 @@ function update(req, res, next) {
 function list(req, res, next) {
   const { limit = 50, skip = 0 } = req.query;
   return User.list({ limit, skip })
-    .then(users => res.json(users))
-    .catch(e => next(e));
+    .then((users) => res.json(users))
+    .catch((e) => next(e));
 }
 
 /**
@@ -68,8 +68,8 @@ function list(req, res, next) {
 function destroy(req, res, next) {
   const { user } = req;
   user.destroy()
-    .then(deletedUser => res.json(deletedUser.safeModel()))
-    .catch(e => next(e));
+    .then((deletedUser) => res.json(deletedUser.safeModel()))
+    .catch((e) => next(e));
 }
 
 module.exports = {

@@ -1,6 +1,8 @@
+// require and configure dotenv, will load vars in .env in PROCESS.ENV
+require('dotenv').config();
 const path = require('path');
 
 module.exports = {
-  "config": path.resolve('./server/config', 'dbConfig.js'),
-  "migrations-path": path.resolve('./server/migrations')
+  "config": path.resolve('./src/config', 'dbConfig.js'),
+  "migrations-path": path.resolve('./src/migrations')
 };

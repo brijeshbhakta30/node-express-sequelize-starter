@@ -1,7 +1,9 @@
-// config should be imported before importing any other file
+// require and configure dotenv, will load vars in .env in PROCESS.ENV
+require('dotenv').config();
 const config = require('./config');
 const server = require('./server');
 
+// eslint-disable-next-line import/order
 const debug = require('debug')('node-server:index');
 
 // make bluebird default Promise
