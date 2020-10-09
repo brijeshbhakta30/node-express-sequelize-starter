@@ -5,7 +5,7 @@ const config = require('./index');
 const { db: dbDetails } = config;
 const sequelize = new Sequelize(dbDetails.database, dbDetails.username, dbDetails.password, {
   host: dbDetails.host,
-  dialect: 'mysql',
+  dialect: dbDetails.dialect,
   pool: {
     max: 5,
     min: 0,
